@@ -4,14 +4,16 @@ using EfSamurai.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EfSamurai.Data.Migrations
 {
     [DbContext(typeof(SamuraiContext))]
-    partial class SamuraiContextModelSnapshot : ModelSnapshot
+    [Migration("20190117141339_nnnnnn")]
+    partial class nnnnnn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,6 +52,8 @@ namespace EfSamurai.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("BattleId");
+
                     b.Property<int?>("BattleLogId");
 
                     b.Property<string>("Description");
@@ -59,6 +63,8 @@ namespace EfSamurai.Data.Migrations
                     b.Property<DateTime>("Time");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BattleId");
 
                     b.HasIndex("BattleLogId");
 
@@ -153,7 +159,11 @@ namespace EfSamurai.Data.Migrations
 
             modelBuilder.Entity("EfSamurai.Domain.BattleEvent", b =>
                 {
-                    b.HasOne("EfSamurai.Domain.BattleLog", "BattleLog")
+                    b.HasOne("EfSamurai.Domain.Battle", "Battle")
+                        .WithMany()
+                        .HasForeignKey("BattleId");
+
+                    b.HasOne("EfSamurai.Domain.BattleLog")
                         .WithMany("BattleEventList")
                         .HasForeignKey("BattleLogId");
                 });
