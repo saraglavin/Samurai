@@ -4,11 +4,15 @@ using System.Text;
 
 namespace EfSamurai.Domain
 {
-   public class Quote
+
+    public class Quote
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public Samurai Samurai { get; set; }
+        public Type Type { get; set; }
+
+
 
     }
 }
